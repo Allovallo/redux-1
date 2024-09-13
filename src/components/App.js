@@ -7,8 +7,9 @@ export const App = () => {
   return (
     <Layout>
       <AppBar />
-      <TaskList />
+
       <TaskForm />
+      <TaskList />
     </Layout>
   );
 };
