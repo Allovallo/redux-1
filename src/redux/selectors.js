@@ -1,3 +1,3 @@
 export const getTasks = (state) => state.tasks;
 
-export const getStatosFilter = (state) => state.filter.status;
+export const getStatusFilter = (state) => state.filter.status;
