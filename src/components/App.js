@@ -1,3 +1,11 @@
+import { TaskForm } from "./TaskForm/TaskForm";
+import { AppBar } from "./AppBar/AppBar";
+
 export const App = () => {
-  return "App";
+  return (
+    <>
+      <AppBar />
+      <TaskForm />
+    </>
+  );
 };
