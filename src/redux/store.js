@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { devToolsEnhancer } from "@redux-devtools/extension";
 
 const initialState = {
   tasks: [
@@ -17,4 +18,5 @@ const rootReducer = (state = initialState, action) => {
   return state;
 };
 
-export const store = configureStore(rootReducer);
+const enchancer = devToolsEnhancer();
+export const store = configureStore({ reducer: rootReducer }, enchancer);
