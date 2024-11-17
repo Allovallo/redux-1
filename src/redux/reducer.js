@@ -9,7 +9,7 @@ const tasksInitialState = [
   { id: 4, text: "Build amazing apps", completed: false },
 ];
 
-const tasksReducer = (state = tasksInitialState, action) => {
+export const tasksReducer = (state = tasksInitialState, action) => {
   switch (action.type) {
     case "tasks/addTask":
       return [...state, action.payload];
@@ -33,7 +33,7 @@ const filtersInintialState = {
   status: statusFilters.all,
 };
 
-const filtersReducer = (state = filtersInintialState, action) => {
+export const filtersReducer = (state = filtersInintialState, action) => {
   switch (action.type) {
     case "filters/setStatusFilter":
       return {
