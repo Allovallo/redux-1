@@ -1,5 +1,12 @@
-import { combineReducers } from "redux";
 import { statusFilters } from "./constants";
+
+import { createReducer } from "@reduxjs/toolkit";
+import {
+  addTask,
+  deleteTask,
+  toggleCompleted,
+  setStatusFilter,
+} from "./actions";
 
 const tasksInitialState = [
   { id: 0, text: "Learn HTML and CSS", completed: true },
@@ -9,43 +16,31 @@ const tasksInitialState = [
   { id: 4, text: "Build amazing apps", completed: false },
 ];
 
-export const tasksReducer = (state = tasksInitialState, action) => {
-  switch (action.type) {
-    case "tasks/addTask":
-      return [...state, action.payload];
-
-    case "tasks/deleteTask":
-      return state.filter((task) => task.id !== action.payload);
-
-    case "tasks/toggeCompleted":
-      return state.map((task) => {
-        if (task.id !== action.payload) {
-          return task;
+export const tasksReducer = createReducer(tasksInitialState, (builder) => {
+  builder
+    .addCase(addTask, (state, action) => {
+      state.push(action.payload);
+    })
+    .addCase(deleteTask, (state, action) => {
+      const index = state.findIndex((task) => task.id === action.payload);
+      state.splice(index, 1);
+    })
+    .addCase(toggleCompleted, (state, action) => {
+      for (const task of state) {
+        if (task.id === action.payload) {
+          task.completed = !task.completed;
+          break;
         }
-        return { ...task, completed: !task.completed };
-      });
-    default:
-      return state;
-  }
-};
+      }
+    });
+});
 
 const filtersInintialState = {
   status: statusFilters.all,
 };
 
-export const filtersReducer = (state = filtersInintialState, action) => {
-  switch (action.type) {
-    case "filters/setStatusFilter":
-      return {
-        ...state,
-        status: action.payload,
-      };
-    default:
-      return state;
-  }
-};
-
-export const rootReducer = combineReducers({
-  tasks: tasksReducer,
-  filters: filtersReducer,
+export const filtersReducer = createReducer(filtersInintialState, (builder) => {
+  builder.addCase(setStatusFilter, (state, action) => {
+    state.status = action.payload;
+  });
 });
