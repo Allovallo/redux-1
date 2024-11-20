@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 // import { devToolsEnhancer } from "@redux-devtools/extension";
 // import { rootReducer } from "./reducer";
 
-import { tasksReducer, filtersReducer } from "./reducer";
+import { tasksReducer, filtersReducer } from "./tasksSlice";
 
 // const initialState = {
 //   tasks: [
@@ -23,6 +23,11 @@ import { tasksReducer, filtersReducer } from "./reducer";
 
 // const enchancer = devToolsEnhancer();
 export const store = configureStore(
-  { reducer: { tasks: tasksReducer, filters: filtersReducer } }
+  {
+    reducer: {
+      tasks: tasksReducer,
+      // filters: filtersReducer
+    },
+  }
   //   enchancer
 );
